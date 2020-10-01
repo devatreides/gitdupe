@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
 import logoImg from '../../assets/logo-gitdupe.svg';
@@ -67,14 +68,14 @@ const Dashboard: React.FC = () => {
           onChange={e => setNewRepo(e.target.value)}
           placeholder="owner/repository_name"
         />
-        <button type="submit">Pesquisar</button>
+        <button type="submit">Search</button>
       </Form>
 
       {inputError && <Error>{inputError}</Error>}
 
       <Repositories>
         {repositories.map(repository => (
-          <a key={repository.full_name} href="teste">
+          <Link key={repository.full_name} to={`/repositories/${repository.full_name}`}>
             <img
               src={repository.owner.avatar_url}
               alt={repository.owner.login}
@@ -85,11 +86,11 @@ const Dashboard: React.FC = () => {
             </div>
 
             <FiChevronRight size={20} />
-          </a>
+          </Link>
         ))}
       </Repositories>
     </>
   );
 };
 
-export default Dashboard;
+export default Dashboard; 
